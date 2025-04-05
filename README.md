@@ -38,11 +38,11 @@ Advanced scheduling algorithms (e.g., job sequencing, time-slot optimization) cr
 Users get alerts if chosen events overlap and are provided with smart alternatives or re-sequencing suggestions.
 ________________________________________
 5. Real-Time Navigation
-•	Augmented Reality (AR) Navigation (USP):
-Integrated AR uses smartphone cameras to show live directional arrows or markers guiding users to event venues.
 •	Accessibility Features:
 Highlights wheelchair-accessible routes, elevators, and ramps to support differently-abled users.
 •	Future Additions:
+  Augmented Reality (AR) Navigation (USP):
+  Integrated AR uses smartphone cameras to show live directional arrows or markers guiding users to event venues.
 In future versions, the app may integrate downloadable campus maps and Bluetooth beacon support for hyper-accurate indoor navigation.
 ________________________________________
 7. Visitor Mode
@@ -60,7 +60,7 @@ ________________________________________
 Why We Stand Out:
 1.	Dynamic Event Optimization:
 Solves a real problem for students juggling multiple events by organizing their schedule intelligently.
-2.	AR Navigation:
+2.	AR Navigation(future scope):
 A visually impressive feature that also provides true value, especially in large campuses.
 3.	Visitor Mode:
 Extends the platform’s use case and brings non-students into the campus culture.
