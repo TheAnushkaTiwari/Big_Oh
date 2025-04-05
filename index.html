@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhatak Matt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1e1e1e;
+      border-bottom: 1px solid #333;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #ffb6c1; /* Light Pink */
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+    }
+    .calendar-button {
+      background-color: transparent;
+      color: #ffffff;
+      font-weight: bold;
+      border: 1px solid #ffb6c1;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #calendar-log {
+      background: #1e1e1e;
+      margin: 1rem 2rem;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #444;
+      color: #fff;
+      display: none;
+    }
+    table.calendar {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .calendar th, .calendar td {
+      border: 1px solid #444;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .calendar th {
+      background: #2c2c2c;
+      color: #ffb6c1;
+    }
+
+    .calendar td.event {
+      background: #333;
+      color: #ffff66;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #e0e0e0;
+      font-weight: 500;
+    }
+    nav .auth-buttons button {
+      margin-left: 10px;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .login-btn {
+      background: transparent;
+      color: #e0e0e0;
+      border: 1px solid #666;
+    }
+    .register-btn {
+      background: #ffb6c1; /* Light Pink */
+      color: #121212;
+    }
+    dialog {
+      background: #2c2c2c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+    }
+    dialog input, dialog select {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: none;
+    }
+    dialog button {
+      background: #ffb6c1;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .event-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .event-card {
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 1rem;
+      width: 300px;
+      color: #fff;
+      border-left: 5px solid #ffb6c1;
+    }
+
+    .event-card h3 {
+      margin-top: 0;
+      color: #ffff66;
+    }
+    .event-card p {
+      margin: 0.5rem 0;
+    }
+    .category-container {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 2rem;
+    }
+    .category-box {
+      padding: 1rem;
+      border-radius: 8px;
+      border: 2px solid #444;
+      background: #2c2c2c;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .category-box:hover {
+      background: #ffb6c1;
+      color: #121212;
+    }
+
+
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #ffb6c1;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      color: #aaa;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .hero .buttons button {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      margin: 0 10px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #ffff66; /* Yellow */
+      color: #121212;
+    }
+    .btn-secondary {
+      background: #90ee90; /* Light Green */
+      color: #121212;
+    }
+    .features {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 2rem 1rem;
+    }
+    .feature-card {
+      width: 200px;
+      text-align: center;
+      padding: 1rem;
+      background: #2c2c2c;
+      border-radius: 10px;
+      border: 2px solid #dda0dd; /* Light Purple */
+    }
+    .feature-card img {
+      width: 40px;
+      margin-bottom: 10px;
+      filter: invert(1);
+    }
+    .section-title {
+      text-align: left;
+      margin: 2rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+    .trending-events, .categories {
+      margin: 1rem 2rem;
+    }
+    .cards-container {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+    }
+    .event-card {
+      min-width: 260px;
+      border-radius: 12px;
+      padding: 1rem;
+      background: #2c2c2c;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      border-left: 5px solid #ffff66; /* Yellow */
+    }
+    .event-card h3 {
+      margin: 0;
+      color: #e0e0e0;
+    }
+    .event-card p {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+    .category-card {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 0.5rem;
+      color: #121212;
+      background: #ffb6c1; /* Light Pink */
+      border: 2px solid #dda0dd; /* Light Purple */
+      cursor: pointer;
+    }
+    .category-card:nth-child(2) {
+      background: #90ee90; /* Light Green */
+    }
+    .category-card:nth-child(3) {
+      background: #dda0dd; /* Light Purple */
+    }
+    .category-card:nth-child(4) {
+      background: #ffff66; /* Yellow */
+    }
+    .category-card:nth-child(5) {
+      background: #ffb6c1; /* Light Pink */
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Bhatak Matt</div>
+    <button class="calendar-button" onclick="toggleCalendar()">📅 My Calendar</button>
+    <div class="auth-buttons">
+      <button class="login-btn" onclick="document.getElementById('userTypeDialog').showModal()">Login</button>
+      <button class="register-btn" onclick="document.getElementById('userTypeDialog').showModal()">Register</button>
+    </div>
+  </nav>
+  <div id="calendar-log">
+    <h3>🗓 Events I'm Participating In</h3>
+    <table class="calendar">
+      <tr>
+        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+      </tr>
+      <tr>
+        <td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+      </tr>
+      <tr>
+        <td>7</td><td>8</td><td>9</td><td class="event">10<br>Workshop</td><td>11</td><td class="event">12<br>Hackathon</td><td>13</td>
+      </tr>
+      <tr>
+        <td>14</td><td>15<br><span class="event">Tech Seminar</span></td><td>16</td><td>17</td><td>18</td><td>19</td><td>20<br><span class="event">Basketball Finals</span></td>
+      </tr>
+      <tr>
+        <td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
+      </tr>
+      <tr>
+        <td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td>
+    </tr>
+  </table>
+</div>
+
+  <dialog id="userTypeDialog">
+    <h3>Select User Type</h3>
+    <select id="userType" onchange="showForm()">
+      <option value="">-- Choose --</option>
+      <option value="student">Student</option>
+      <option value="club">Club</option>
+      <option value="visitor">Visitor</option>
+    </select>
+
+    <form id="studentForm" style="display:none;">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="College Email ID" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+  
+      <form id="clubForm" style="display:none;">
+        <input type="email" placeholder="Club Email ID" required />
+        <input type="text" placeholder="Authentication Code" required />
+        <input type="text" placeholder="Club Name" required />
+        <button type="submit">Login</button>
+      </form>
+  
+      <form id="visitorForm" style="display:none;">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email ID" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+  
+      <button onclick="document.getElementById('userTypeDialog').close()">Close</button>
+  </dialog>
+
+
+  <section class="hero">
+    <h1>Bhatak Matt</h1>
+    <p>Discover campus events, navigate venues, and create your personalized event schedule.</p>
+    <div class="buttons">
+      <button class="btn-primary" onclick="location.href='events.html'">Explore Events</button>
+      <button class="btn-secondary" onclick="location.href='campus-map.html'">Campus Map</button>
+    </div>
+  </section>
+
+  <section class="features">
+    <a href="events.html" style="text-decoration: none; color: inherit;">
+    <div class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/50/000000/calendar.png" />
+      <h4>Event Discovery</h4>
+      <p>Find and register for campus events that match your interests.</p>
+    </div>
+    </a>
+    <div class="feature-card">
+    <a href="campus-map.html" style="text-decoration: none; color: inherit;">
+      <img src="https://img.icons8.com/ios-filled/50/000000/navigation.png" />
+      <h4>Campus Navigation</h4>
+      <p>Get directions to venues with accessibility info.</p>
+    </div>
+    </a>
+    <div class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/50/000000/group.png" />
+      <h4>Team Formation</h4>
+      <p>Find teammates with matching competition skills.</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/50/000000/organization.png" />
+      <h4>Club Management</h4>
+      <p>Stay updated with your favorite clubs and events.</p>
+    </div>
+  </section>
+
+  <section class="trending-events">
+    <div class="section-title">Trending Events</div>
+    <div class="cards-container">
+      <div class="event-card">
+        <h3>Annual Tech Fest</h3>
+        <p>Apr 20, 9:00 AM – Tech Block Auditorium</p>
+        <p>Biggest tech event with prizes and competitions.</p>
+      </div>
+      <div class="event-card">
+        <h3>Basketball Tournament</h3>
+        <p>Apr 15, 2:00 PM – Sports Complex</p>
+        <p>Inter-department tournament. Support your team!</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+      function toggleCalendar() {
+      const calendar = document.getElementById("calendar-log");
+      calendar.style.display = calendar.style.display === "none" ? "block" : "none";
+    }
+
+    function showForm() {
+      document.getElementById('studentForm').style.display = 'none';
+      document.getElementById('clubForm').style.display = 'none';
+      document.getElementById('visitorForm').style.display = 'none';
+
+      const type = document.getElementById('userType').value;
+      if (type === 'student') document.getElementById('studentForm').style.display = 'block';
+      if (type === 'club') document.getElementById('clubForm').style.display = 'block';
+      if (type === 'visitor') document.getElementById('visitorForm').style.display = 'block';
+    }
+  </script>
+
+  <section class="categories">
+    <div class="section-title">Browse by Category</div>
+    <div class="cards-container">
+      <div class="category-card">Tech</div>
+      <div class="category-card">Sports</div>
+      <div class="category-card">Cultural</div>
+      <div class="category-card">Social</div>
+      <div class="category-card">Hostel</div>
+    </div>
+  </section>
+</body>
+</html>
